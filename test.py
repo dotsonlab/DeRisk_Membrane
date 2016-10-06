@@ -1,5 +1,3 @@
-#for demo, I am adding this note
-
 import Adafruit_BBIO.ADC as ADC
 import time, sys
 import os.path
