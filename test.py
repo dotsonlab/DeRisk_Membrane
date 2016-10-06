@@ -112,11 +112,11 @@ while True:
         pressure3 = volts3 * 347.22 - 125.00 + 4.06 #inter reject
         pressure4 = volts4 * 140.45 - 49.16 - 0.37 #wash product
         pressure5 = volts5 * 140.45 - 49.16 + 1.16 #inter product
-        
+
 	if (printcount>5):
             print pt,'\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f\t%s\t%.2f' % ( "F: ",pressure1,"GW-R: ",pressure2,"I-P: ",pressure5,"I-R: ",pressure3,"W-P",pressure4)
             printcount=0
-        
+
 	#write to the screen #
         ###comment this out when not testing####
         #print pt,'\t%s\t%f\t%f\t%f\t%i' % ( "1",reading1,volts1,pressure1,count)
