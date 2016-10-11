@@ -104,7 +104,7 @@ while True:
         #scale 1.8V reading to pressure based on 4-20mA signal read
         #from shunt resistor with a 1.8V max at 20 mA corresponding to
         #200 psi and a 4mA min corresponding to 0 psi
-        pressure1 = volts1 * 144.342 - 50.00
+        pressure1 = volts1 * 144.342 - 144.342
         pressure2 = volts2 * 140.45 - 49.16
         pressure3 = volts3 * 140.45 - 49.16
         pressure4 = volts4 * 140.45 - 49.16
