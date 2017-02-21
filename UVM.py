@@ -98,7 +98,7 @@ while True:
     data1 = [[deltaT, "NA", "NA", reading0, volts0, flow0, reading2,
             volts2, flow2, reading6, volts6, flow6, reading1,
             volts1, pressure1, reading3, volts3, pressure3, reading5,
-            volts5, pressure5, Flow_Total_Rate]] #Sets all tuples in list form
+            volts5, pressure5, permeateflux, TMP, Recovery, Flow_Total_Rate]] #Sets all tuples in list form
     i = open('UVM'+newfile+'.csv', 'ab') #Assigns variable to open file with auto-populated name
     tempwriter = csv.writer(i)
     for row in data1:
