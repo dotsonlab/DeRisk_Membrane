@@ -27,9 +27,10 @@ data = [[newfile, "degrees C", "degrees C",
        "raw signal", "Volts", "L/min","raw signal", "Volts", "L/min",
        "raw signal", "Volts", "L/min", "raw signal", "Volts", "bar",
        "raw signal", "Volts", "bar", "raw signal", "Volts", "bar",
-       'L/mu"\u00B2"/hr', "bar", "%"], ["Time(s)", "T1", "T2", "F1", "F1",
+       'L/mu"\u00B2"/hr', "bar", "%", "L/min"], ["Time(s)", "T1", "T2", "F1", "F1",
        "F1", "F2", "F2", "F2", "F3", "F3", "F3", "P1", "P1", "P1",
-       "P2", "P2", "P2", "P3", "P3", "P3", "Jp", "TMP", "Recovery"]]
+       "P2", "P2", "P2", "P3", "P3", "P3", "Jp", "TMP", "Recovery", 
+       "Total Flow Rate"]]
 i = open('UVM'+newfile+'.csv', 'ab') 
 tempwriter = csv.writer(i)
 for row in data:
@@ -75,7 +76,7 @@ while True:
 
     SiC_SA = 0.01628916
     permeateflux = flow0 * 3.78541 * 60 / SiC_SA #gpm * L/gal * min/hr / m^2
-    Flow_Total = flow0 + flow2 #Concentrate + Permeate flow
+    Flow_Total_Rate = flow0 + flow2 #Concentrate + Permeate flow
     TMP = (pressure1 + pressure5) / 2 - pressure3 #(pressure feed + pressure reject)/2 - pressure permeate
     Recovery = flow0/(flow0 + flow2) * 100 #permeate flow/(reject + permeate flow)*100
 
@@ -88,7 +89,7 @@ while True:
     print 'P1=\t%s\t%s\t%s' % (reading1, volts1, pressure1)
     print 'P2=\t%s\t%s\t%s\nP3=\t%s\t%s\t%s' % (reading3, volts3, pressure3, reading5, volts5, pressure5)
     print 'Jp=\t%s' % (permeateflux) #Displays permeate flux
-    print 'Ft=\t%s' % (Flow_Total) #Displays total flow or sum or perm and reject
+    print 'Ft=\t%s' % (Flow_Total_Rate) #Displays total flow or sum or perm and reject
     print 'TMP=\t %s' % (TMP) #Displays TMP
     print 'R=\t%s' % (Recovery) #Displays permeate recovery percentage
     print #prints a space to separate blocks of data on display
@@ -97,7 +98,7 @@ while True:
     data1 = [[deltaT, "NA", "NA", reading0, volts0, flow0, reading2,
             volts2, flow2, reading6, volts6, flow6, reading1,
             volts1, pressure1, reading3, volts3, pressure3, reading5,
-            volts5, pressure5]] #Sets all tuples in list form
+            volts5, pressure5, Flow_Total_Rate]] #Sets all tuples in list form
     i = open('UVM'+newfile+'.csv', 'ab') #Assigns variable to open file with auto-populated name
     tempwriter = csv.writer(i)
     for row in data1:
