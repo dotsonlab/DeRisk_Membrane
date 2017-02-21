@@ -94,13 +94,13 @@ while True:
     print #prints a space to separate blocks of data on display
 
            #prints raw reading, output voltage, and flow
-    data1 = [deltaT, reading0, volts0, flow0, reading2,
+    data1 = [[deltaT, reading0, volts0, flow0, reading2,
             volts2, flow2, reading6, volts6, flow6, reading1,
             volts1, pressure1, reading3, volts3, pressure3, reading5,
-            volts5, pressure5] #Sets all tuples in list form
+            volts5, pressure5]] #Sets all tuples in list form
     i = open('UVM'+newfile+'.csv', 'ab') #Assigns variable to open file with auto-populated name
     tempwriter = csv.writer(i)
-    for row in data:
+    for row in data1:
         tempwriter.writerow(row) #opens file and writes new data to the list
     i.close()
     time.sleep(5)
