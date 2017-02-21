@@ -4,6 +4,7 @@ import os.path
 import csv
 
 start_time = time.localtime()
+start_time1 = time.strftime('%M:%S', time.localtime())
 ####setup ADC and assign input pin
 ADC.setup()
 #analog input pins are
@@ -67,9 +68,10 @@ while True:
     TMP = (pressure1 + pressure5) / 2 - pressure3 #(pressure feed + pressure reject)/2 - pressure permeate
     Recovery = flow0/(flow0 + flow2) * 100 #permeate flow/(reject + permeate flow)*100
 
-    elapsed_time = time.localtime() - start_time #calculates the number of seconds elapsed
+    elapsed_time = time.strftime('%M:%S', time.localtime())
+    deltaT = float(elapsed_time) - float(start_time1) #calculates the number of seconds elapsed
 
-    print elapsed_time
+    print deltaT
     print 'F1=\t%s\t%s\t%s\nF2=\t%s\t%s\t%s' % (reading0, volts0, flow0, reading2, volts2, flow2)
     print 'F3=\t%s\t%s\t%s' % (reading6, volts6, flow6)
     print 'P1=\t%s\t%s\t%s' % (reading1, volts1, pressure1)
