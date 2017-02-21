@@ -3,8 +3,7 @@ import time, sys
 import os.path
 import csv
 
-start_time = time.localtime()
-start_time1 = time.strftime('%M:%S', time.localtime())
+start_time1 = time.time()
 ####setup ADC and assign input pin
 ADC.setup()
 #analog input pins are
@@ -24,6 +23,18 @@ psensor_pin5 = 'P9_36'
 
 newfile = time.strftime('%Y-%b-%d,%H:%M:%S', time.localtime())
 
+data = [[newfile, "degrees C", "degrees C",
+       "raw signal", "Volts", "L/min","raw signal", "Volts", "L/min",
+       "raw signal", "Volts", "L/min", "raw signal", "Volts", "bar",
+       "raw signal", "Volts", "bar", "raw signal", "Volts", "bar",
+       'L/mu"\u00B2"/hr', "bar", "%"], ["Time(s)", "T1", "T2", "F1", "F1",
+       "F1", "F2", "F2", "F2", "F3", "F3", "F3", "P1", "P1", "P1",
+       "P2", "P2", "P2", "P3", "P3", "P3", "Jp", "TMP", "Recovery"]]
+i = open('UVM'+newfile+'.csv', 'ab') 
+tempwriter = csv.writer(i)
+for row in data:
+    tempwriter.writerow(row) #opens file and writes new data to the list
+i.close()
 
 print newfile
 
@@ -68,8 +79,8 @@ while True:
     TMP = (pressure1 + pressure5) / 2 - pressure3 #(pressure feed + pressure reject)/2 - pressure permeate
     Recovery = flow0/(flow0 + flow2) * 100 #permeate flow/(reject + permeate flow)*100
 
-    elapsed_time = time.strftime('%M:%S', time.localtime())
-    deltaT = float(elapsed_time) - float(start_time1) #calculates the number of seconds elapsed
+    elapsed_time = time.time()
+    deltaT = float(elapsed_time) - float(start_time1) #calculates the number of$    print elapsed_time
 
     print deltaT
     print 'F1=\t%s\t%s\t%s\nF2=\t%s\t%s\t%s' % (reading0, volts0, flow0, reading2, volts2, flow2)
@@ -83,10 +94,14 @@ while True:
     print #prints a space to separate blocks of data on display
 
            #prints raw reading, output voltage, and flow
-    data = [reading0, volts0, flow0], [reading2, volts2, flow2], [reading6, volts6, flow6], [reading1, volts1, pressure1], [reading3, volts3, pressure3], [reading5, volts5, pressure5] #Sets all tuples in list form
+    data1 = [deltaT, reading0, volts0, flow0, reading2,
+            volts2, flow2, reading6, volts6, flow6, reading1,
+            volts1, pressure1, reading3, volts3, pressure3, reading5,
+            volts5, pressure5] #Sets all tuples in list form
     i = open('UVM'+newfile+'.csv', 'ab') #Assigns variable to open file with auto-populated name
     tempwriter = csv.writer(i)
     for row in data:
         tempwriter.writerow(row) #opens file and writes new data to the list
     i.close()
     time.sleep(5)
+
