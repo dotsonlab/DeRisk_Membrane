@@ -10,9 +10,9 @@
 	/* state the resources this cape uses */
 	exclusive-use =
 		/* the pin header uses */
-		"P9.22","P9.24"
+		"P9.22",
 		/* the hardware IP uses */
-		"gpio0_2","gpio0_15";
+		"gpio0_2";
 
 	fragment@0 {
                target = <&am33xx_pinmux>;
@@ -33,28 +33,6 @@
 			       status          = "okay";
 
 			       gpios = <&gpio1 2 0>;
-		       };
-         };
-	};
-  fragment@2 {
-               target = <&am33xx_pinmux>;
-               __overlay__ {
-					dallas_w1_pins: pinmux_dallas_w1_pins {
-						pinctrl-single,pins = < 							0x184 0x37 						>;
-					};
-               };
-	};
-
-	fragment@3 {
-               target = <&ocp>;
-               __overlay__ {
-		       onewire@0 {
-			       compatible      = "w1-gpio";
-			       pinctrl-names   = "default";
-			       pinctrl-0       = <&dallas_w1_pins>;
-			       status          = "okay";
-
-			       gpios = <&gpio1 15 0>;
 		       };
          };
 	};
